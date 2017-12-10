@@ -9,34 +9,23 @@ import static ru.sbt.mipt.oop.SensorEventType.*;
 public class Application {
 
     public static void main(String... args) throws IOException {
-        // считываем состояние дома из файла
         SmartHome smartHome = JsonReader.read();
-        // начинаем цикл обработки событий
-        allEventsProcessing(smartHome);
+        SensorEventObserver observer = new SensorEventObserver(smartHome);
+        configurateHandlers(observer);
+        observer.runEventCycle();
+
     }
 
-    public static void allEventsProcessing(SmartHome smartHome) {
-        SensorEvent event = getNextSensorEvent();
-
-        Collection<EventHandler> handlers = new ArrayList<EventHandler>();
-
-        handlers.add(new LightEventProcessor());
-        handlers.add(new DoorEventProcessor());
-
-        while (event != null) {
-            System.out.println("Got event: " + event);
-            for (EventHandler handle : handlers) {
-                handle.handle(smartHome, event);
-            }
-            event = getNextSensorEvent();
-        }
+    public static void configurateHandlers(SensorEventObserver sensorEventObserver) {
+        sensorEventObserver.addHandler(new LightEventProcessor());
+        sensorEventObserver.addHandler(new DoorEventProcessor());
     }
 
     static void sendCommand(SensorCommand command) {
-        System.out.println("Pretent we're sending command " + command);
+        System.out.println("Pretend we're sending command " + command);
     }
 
-    private static SensorEvent getNextSensorEvent() {
+    static SensorEvent getNextSensorEvent() {
         // pretend like we're getting the events from physical world, but here we're going to just generate some random events
         if (Math.random() < 0.05) return null; // null means end of event stream
         SensorEventType sensorEventType = SensorEventType.values()[(int) (4 * Math.random())];
