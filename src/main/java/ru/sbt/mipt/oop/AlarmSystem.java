@@ -1,25 +1,30 @@
-
 package ru.sbt.mipt.oop;
 
-import static ru.sbt.mipt.oop.AlarmSystemStates.OFF;
-import static ru.sbt.mipt.oop.AlarmSystemStates.ON;
-import static ru.sbt.mipt.oop.AlarmSystemStates.WAIT_FOR_PASSWORD;
+public class AlarmSystem implements AlarmSystemState {
 
-public class AlarmSystem {
+    private AlarmSystemState alarmSystem;
 
-    private AlarmSystemStates state = OFF;
+    public AlarmSystem(){
+        alarmSystem = new AlarmSystemStateOff(this);
+    }
 
+    @Override
     public AlarmSystemStates getState() {
-        return state;
+        return alarmSystem.getState();
     }
 
+    @Override
     public void turnOn() {
-        if (state == WAIT_FOR_PASSWORD) return;
-        else state = ON;
+        alarmSystem.turnOn();
     }
 
+    @Override
     public void onEvent(SensorEvent event) {
-        if(state == OFF) return;
-        state = WAIT_FOR_PASSWORD;
+        alarmSystem.onEvent(event);
     }
+
+    public void setState(AlarmSystemState newState){
+        this.alarmSystem = newState;
+    }
+
 }
