@@ -1,6 +1,8 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.processors;
 
 
+import ru.sbt.mipt.oop.sensors.SensorEvent;
+import ru.sbt.mipt.oop.entities.SmartHome;
 import ru.sbt.mipt.oop.alarmSystem.AlarmSystem;
 
 import java.util.Collection;

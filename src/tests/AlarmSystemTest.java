@@ -1,45 +1,49 @@
-package ru.sbt.mipt.oop;
+import ru.sbt.mipt.oop.sensors.*;
 
 import org.junit.Test;
+import ru.sbt.mipt.oop.alarmSystem.AlarmSystem;
+import ru.sbt.mipt.oop.sensors.SensorEvent;
+import ru.sbt.mipt.oop.sensors.SensorEventType;
 
-import static ru.sbt.mipt.oop.AlarmSystemStates.OFF;
-import static ru.sbt.mipt.oop.AlarmSystemStates.ON;
-import static ru.sbt.mipt.oop.AlarmSystemStates.WAIT_FOR_PASSWORD;
+import static ru.sbt.mipt.oop.alarmSystem.AlarmSystemStates.OFF;
+import static ru.sbt.mipt.oop.alarmSystem.AlarmSystemStates.ON;
+import static ru.sbt.mipt.oop.alarmSystem.AlarmSystemStates.WAIT_FOR_PASSWORD;
 
 import static org.junit.Assert.assertEquals;
 
 public class AlarmSystemTest {
+
+    public SensorEvent newEvent() {
+        return new SensorEvent(SensorEventType.DOOR_OPEN, "1");
+    }
+
     @Test
-    public void testOff(){
-        AlarmSystem alarmSystem = new AlarmSystem();
+    public void testNew(){
+        AlarmSystem alarmSystem = new AlarmSystem(0);
         assertEquals(OFF, alarmSystem.getState());
     }
 
     @Test
-    public void testOn(){
-        AlarmSystem alarmSystem = new AlarmSystem();
+    public void testTurnOn(){
+        AlarmSystem alarmSystem = new AlarmSystem(0);
         alarmSystem.turnOn();
         assertEquals(ON, alarmSystem.getState());
     }
 
     @Test
     public void testPasswordWaiting(){
-        AlarmSystem alarmSystem = new AlarmSystem();
-        SensorEvent event = createSensorEvent();
+        SensorEvent event = newEvent();
+        AlarmSystem alarmSystem = new AlarmSystem(0);
         alarmSystem.turnOn();
         alarmSystem.onEvent(event);
         assertEquals(WAIT_FOR_PASSWORD, alarmSystem.getState());
     }
 
     @Test
-    public void testOnEventWhenSystemIsOff(){
-        AlarmSystem alarmSystem = new AlarmSystem();
-        alarmSystem.onEvent(createSensorEvent());
+    public void testOff(){
+        AlarmSystem alarmSystem = new AlarmSystem(0);
+        alarmSystem.onEvent(newEvent());
         assertEquals(OFF, alarmSystem.getState());
     }
 
-
-    public SensorEvent createSensorEvent() {
-        return new SensorEvent(SensorEventType.DOOR_OPEN, "1");
-    }
 }

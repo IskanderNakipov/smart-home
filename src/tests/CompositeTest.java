@@ -1,5 +1,3 @@
-
-package ru.sbt.mipt.oop;
 import org.junit.Test;
 import ru.sbt.mipt.oop.entities.Door;
 import ru.sbt.mipt.oop.entities.Light;
@@ -15,7 +13,7 @@ import java.util.Set;
 
 
 
-public class TestComposite {
+public class CompositeTest {
     @Test
     public void actionableComposite(){
         List<Light> lights1 = Arrays.asList(new Light("1", false), new Light("2", true));

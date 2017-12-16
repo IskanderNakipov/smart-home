@@ -1,4 +1,6 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.alarmSystem;
+
+import ru.sbt.mipt.oop.sensors.SensorEvent;
 
 import java.util.Scanner;
 
@@ -9,7 +11,6 @@ public class AlarmSystemStateWaitForPassword implements AlarmSystemState {
     public AlarmSystemStateWaitForPassword(AlarmSystem system, int password) {
         alarmSystem = system;
         this.password = password;
-        //enterPassword();
     }
 
     public void enterPassword() {

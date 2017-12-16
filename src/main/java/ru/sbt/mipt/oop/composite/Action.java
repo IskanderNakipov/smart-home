@@ -1,6 +1,5 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.composite;
 
 public interface Action {
-
     void execute (Object object);
 }

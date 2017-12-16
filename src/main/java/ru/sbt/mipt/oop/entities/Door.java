@@ -1,14 +1,14 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.entities;
 
 import ru.sbt.mipt.oop.composite.Action;
 import ru.sbt.mipt.oop.composite.Actionable;
 
 public class Door implements Actionable {
     private final String id;
-    private boolean isOpen;
+    private boolean state;
 
     public Door(boolean isOpen, String id) {
-        this.isOpen = isOpen;
+        this.state = isOpen;
         this.id = id;
     }
 
@@ -16,12 +16,12 @@ public class Door implements Actionable {
         return id;
     }
 
-    public void setOpen(boolean open) {
-        isOpen = open;
+    public void setState(boolean open) {
+        state = open;
     }
 
     public boolean isOpen() {
-        return isOpen;
+        return state;
     }
 
     @Override
@@ -29,3 +29,4 @@ public class Door implements Actionable {
         action.execute(this);
     }
 }
+

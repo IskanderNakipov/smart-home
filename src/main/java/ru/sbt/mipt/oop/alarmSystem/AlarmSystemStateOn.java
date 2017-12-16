@@ -1,4 +1,6 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.alarmSystem;
+
+import ru.sbt.mipt.oop.sensors.SensorEvent;
 
 public class AlarmSystemStateOn implements AlarmSystemState {
     private final AlarmSystem alarmSystem;
@@ -12,6 +14,11 @@ public class AlarmSystemStateOn implements AlarmSystemState {
     @Override
     public AlarmSystemStates getState() {
         return AlarmSystemStates.ON;
+    }
+
+    @Override
+    public void enterPassword() {
+        return;
     }
 
     @Override

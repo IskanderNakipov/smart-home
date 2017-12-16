@@ -1,35 +1,25 @@
 package ru.sbt.mipt.oop;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
+import ru.sbt.mipt.oop.entities.SmartHome;
+import ru.sbt.mipt.oop.sensors.SensorCommand;
+import ru.sbt.mipt.oop.sensors.SensorEventObserver;
+import ru.sbt.mipt.oop.processors.*;
 
-import static ru.sbt.mipt.oop.SensorEventType.*;
+import java.io.IOException;
 
 public class Application {
 
     public static void main(String... args) throws IOException {
-        SmartHome smartHome = JsonReader.read();
-        SensorEventObserver observer = new SensorEventObserver(smartHome);
-        configurateHandlers(observer);
-        observer.runEventCycle();
 
-    }
-
-    public static void configurateHandlers(SensorEventObserver sensorEventObserver) {
+        SmartHome smartHome = SmartHomeReader.read("smart-home-1.js");
+        SensorEventObserver sensorEventObserver = new SensorEventObserver(smartHome);
         sensorEventObserver.addHandler(new LightEventProcessor());
         sensorEventObserver.addHandler(new DoorEventProcessor());
+        sensorEventObserver.observe();
+
     }
 
-    static void sendCommand(SensorCommand command) {
+    public static void sendCommand(SensorCommand command) {
         System.out.println("Pretend we're sending command " + command);
-    }
-
-    static SensorEvent getNextSensorEvent() {
-        // pretend like we're getting the events from physical world, but here we're going to just generate some random events
-        if (Math.random() < 0.05) return null; // null means end of event stream
-        SensorEventType sensorEventType = SensorEventType.values()[(int) (4 * Math.random())];
-        String objectId = "" + ((int) (10 * Math.random()));
-        return new SensorEvent(sensorEventType, objectId);
     }
 }

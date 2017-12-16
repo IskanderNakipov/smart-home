@@ -7,7 +7,7 @@
           "id": "1"
         },
         {
-          "isOn": true,
+          "isOn": false,
           "id": "2"
         }
       ],
@@ -29,7 +29,7 @@
       "doors": [
         {
           "id": "2",
-          "isOpen": false
+          "isOpen": true
         }
       ],
       "name": "bathroom"
@@ -37,7 +37,7 @@
     {
       "lights": [
         {
-          "isOn": false,
+          "isOn": true,
           "id": "4"
         },
         {

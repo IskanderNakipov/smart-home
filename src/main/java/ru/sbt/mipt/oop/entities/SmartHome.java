@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.entities;
 
 import ru.sbt.mipt.oop.composite.Action;
 import ru.sbt.mipt.oop.composite.Actionable;
