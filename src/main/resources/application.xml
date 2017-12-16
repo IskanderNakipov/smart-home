@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <!-- Event processors-->
+    <bean id="lightEventProcessor" class="ru.sbt.mipt.oop.processors.LightEventProcessor"/>
+    <bean id="doorEventProcessor" class="ru.sbt.mipt.oop.processors.DoorEventProcessor"/>
+    <bean id="autoEventProcessor" class="ru.sbt.mipt.oop.processors.AutoEventProcessor"/>
+
+    <!-- Event producers-->
+    <bean id="smartHome" class="ru.sbt.mipt.oop.JsonReader" factory-method="read"/>
+
+
+    <bean id="alarmSystem" class="ru.sbt.mipt.oop.alarmSystem.AlarmSystem">
+        <constructor-arg index="0" type="int" value= "1234"/>
+    </bean>
+
+    <bean id="eventProcessor" class="ru.sbt.mipt.oop.processors.EventProcessor">
+        <constructor-arg index="0" ref="smartHome"/>
+        <constructor-arg index="1" ref="alarmSystem"/>
+    </bean>
+
+
+</beans>

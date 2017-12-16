@@ -1,10 +1,13 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.entities.SmartHome;
+import ru.sbt.mipt.oop.processors.EventHandler;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static ru.sbt.mipt.oop.Application.getNextSensorEvent;
+import static ru.sbt.mipt.oop.processors.ExternalEventProcessor.getNextSensorEvent;
 
 public class SensorEventObserver {
     private Collection<EventHandler> handlers = new ArrayList<>();
