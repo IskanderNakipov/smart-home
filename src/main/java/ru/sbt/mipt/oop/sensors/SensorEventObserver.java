@@ -2,7 +2,6 @@ package ru.sbt.mipt.oop.sensors;
 
 import ru.sbt.mipt.oop.entities.SmartHome;
 import ru.sbt.mipt.oop.processors.EventHandler;
-import ru.sbt.mipt.oop.processors.EventProcessor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +10,7 @@ import static ru.sbt.mipt.oop.processors.ExternalEventProcessor.getNextSensorEve
 
 
 public class SensorEventObserver {
-    private Collection<EventHandler> processors = new ArrayList<>();
+    public Collection<EventHandler> processors = new ArrayList<>();
     private SmartHome home;
 
     public SensorEventObserver(SmartHome home) {
@@ -33,7 +32,10 @@ public class SensorEventObserver {
         }
     }
 
-    public void addHandler(EventHandler eventHandler){
+    public void addProcessor(EventHandler eventHandler){
         processors.add(eventHandler);
+    }
+    public void setProcessors(Collection<EventHandler> handlers){
+        this.processors = handlers;
     }
 }

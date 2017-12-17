@@ -20,7 +20,7 @@ public class SensorEventObserverTest {
         eventHandlers.add(new AutoEventProcessor());
 
         for (EventHandler handler: eventHandlers) {
-            observer.addHandler(handler);
+            observer.addProcessor(handler);
         }
 
         assertEquals(3, observer.processors.size());

@@ -1,9 +1,9 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.entities.SmartHome;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.sbt.mipt.oop.alarmSystem.*;
 import ru.sbt.mipt.oop.sensors.SensorCommand;
 import ru.sbt.mipt.oop.sensors.SensorEventObserver;
-import ru.sbt.mipt.oop.processors.*;
 
 import java.io.IOException;
 
@@ -11,12 +11,11 @@ public class Application {
 
     public static void main(String... args) throws IOException {
 
-        SmartHome smartHome = SmartHomeReader.read("smart-home-1.js");
-        SensorEventObserver sensorEventObserver = new SensorEventObserver(smartHome);
-        sensorEventObserver.addHandler(new LightEventProcessor());
-        sensorEventObserver.addHandler(new DoorEventProcessor());
-        sensorEventObserver.observe();
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("application.xml");
+        SensorEventObserver sensorEventObserver = (SensorEventObserver) ctx.getBean("sensorEventObserver");
+        AlarmSystemState alarmSystemState = (AlarmSystemState) ctx.getBean("alarmSystem");
 
+        sensorEventObserver.observe();
     }
 
     public static void sendCommand(SensorCommand command) {

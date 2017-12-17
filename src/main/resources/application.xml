@@ -11,6 +11,17 @@
     <bean id="smartHome" class="ru.sbt.mipt.oop.JsonReader" factory-method="read"/>
 
 
+    <bean id="sensorEventObserver" class="ru.sbt.mipt.oop.sensors.SensorEventObserver" >
+        <constructor-arg index="0" ref="smartHome"/>
+        <property name="processors">
+            <list>
+                <ref bean="lightEventProcessor" />
+                <ref bean="doorEventProcessor" />
+                <ref bean="autoEventProcessor" />
+            </list>
+        </property>
+    </bean>
+
     <bean id="alarmSystem" class="ru.sbt.mipt.oop.alarmSystem.AlarmSystem">
         <constructor-arg index="0" type="int" value= "1234"/>
     </bean>
