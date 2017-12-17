@@ -35,6 +35,7 @@ public class SensorEventObserver {
     public void addProcessor(EventHandler eventHandler){
         processors.add(eventHandler);
     }
+
     public void setProcessors(Collection<EventHandler> handlers){
         this.processors = handlers;
     }
